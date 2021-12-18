@@ -56,7 +56,31 @@ transaction = SimpleStorage.constructor().buildTransaction(
         "nonce": nonce,
     }
 )
+# Sign the transaction
 signed_txn = w3.eth.account.sign_transaction(transaction, private_key=private_key)
 # Send signed transaction
+print("Deploying contract...")
 tx_hash = w3.eth.send_raw_transaction(signed_txn.rawTransaction)
 tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+print("Deployed")
+
+simple_storage = w3.eth.contract(address=tx_receipt.contractAddress, abi=abi)
+
+# Initial value of favourite number
+print(simple_storage.functions.retrieve().call())
+print("Updating contract...")
+greeting_transaction = simple_storage.functions.store(15).buildTransaction(
+    {
+        "chainId": chain_id,
+        "gasPrice": w3.eth.gas_price,
+        "from": my_address,
+        "nonce": nonce + 1,
+    }
+)
+signed_greeting_tx = w3.eth.account.sign_transaction(
+    greeting_transaction, private_key=private_key
+)
+tx_greeting_hash = w3.eth.send_raw_transaction(signed_greeting_tx.rawTransaction)
+tx_receipt = w3.eth.wait_for_transaction_receipt(tx_greeting_hash)
+print("Updated")
+print(simple_storage.functions.retrieve().call())
