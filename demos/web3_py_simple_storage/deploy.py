@@ -39,9 +39,9 @@ bytecode = compiled_sol['contracts']['SimpleStorage.sol']['SimpleStorage']['evm'
 abi = compiled_sol['contracts']['SimpleStorage.sol']['SimpleStorage']['abi']
 
 # Connect to Ganache
-w3 = Web3(Web3.HTTPProvider("http://0.0.0.0:8545"))
+w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))
 chain_id = 1337
-my_address = "0x16a71fbdADA085bAcB5856e39ef428B957670976"
+my_address = "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1"
 private_key = os.getenv("PRIVATE_KEY")
 
 # Create contract
@@ -84,3 +84,10 @@ tx_greeting_hash = w3.eth.send_raw_transaction(signed_greeting_tx.rawTransaction
 tx_receipt = w3.eth.wait_for_transaction_receipt(tx_greeting_hash)
 print("Updated")
 print(simple_storage.functions.retrieve().call())
+
+
+
+
+
+# 4:10:00
+# https://www.youtube.com/watch?v=M576WGiDBdQ
