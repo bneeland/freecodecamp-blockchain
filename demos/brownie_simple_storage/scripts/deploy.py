@@ -12,6 +12,3 @@ def deploy_simple_storage():
 
 def main():
     deploy_simple_storage()
-
-# https://www.youtube.com/watch?v=M576WGiDBdQ
-# 4:47
