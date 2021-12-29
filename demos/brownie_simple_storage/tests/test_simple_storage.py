@@ -19,6 +19,3 @@ def test_updating_storage():
     simple_storage.store(expected, {"from": account})
     # Step 3: Assert
     assert expected == simple_storage.retrieve()
-
-# https://www.youtube.com/watch?v=M576WGiDBdQ
-# 4:52
